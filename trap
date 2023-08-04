@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+$stdout.sync = true
+
+def handle_termination_signal(signal)
+  puts "Received #{signal}. Cleaning up..."
+  exit
+end
+
+trap('INT') { handle_termination_signal('SIGINT') }
+trap('TERM') { handle_termination_signal('SIGTERM') }
+trap('QUIT') { handle_termination_signal('SIGQUIT') }
+
+loop do
+  puts "Running...Press Ctrl+C to terminate."
+  sleep 1
+end
